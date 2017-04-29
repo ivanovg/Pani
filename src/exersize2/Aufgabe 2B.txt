@@ -1,0 +1,35 @@
+SolveBossPuzzle(I)
+	// ordne Zeile 1 an
+	verschiebeKachel(1,1,1,{})
+	verschiebeKachel(2,2,1,{1})
+	verschiebeKachel(4,3,1,{1,2})
+	verschiebeKachel(3,3,2,{1,2,4})
+	verschiebeLeerfeld(4,1,{1,2,3,4})
+	verschiebe(4)
+	verschiebe(3)
+	
+	// ordne Zeile 2 an
+	verschiebeKachel(5,1,2,{1,2,3,4})
+	verschiebeKachel(6,2,2,{1,2,3,4,5})
+	verschiebeKachel(8,3,2,{1,2,3,4,5,6})
+	verschiebeKachel(7,3,3,{1,2,3,4,5,6,8})
+	verschiebeLeerfeld(4,2,{1,2,3,4,5,6,7,8})
+	verschiebe(8)
+	verschiebe(7)
+	
+	// ordne Position 9 und 13 an
+	verschiebeKachel(13,1,3,{1,2,3,4,5,6,7,8})
+	verschiebeKachel(9,2,3,{1,2,3,4,5,6,7,8,13})
+	verschiebeLeerfeld(1,4,{1,2,3,4,5,6,7,8,9,13})
+	verschiebe(13)
+	verschiebe(9)
+	
+	// ordne Position 10 und 14 an
+	verschiebeKachel(14,2,3,{1,2,3,4,5,6,7,8,9,13})
+	verschiebeKachel(10,3,3,{1,2,3,4,5,6,7,8,9,13,14})
+	verschiebeLeerfeld(2,4,{1,2,3,4,5,6,7,8,9,10,13,14})
+	verschiebe(14)
+	verschiebe(10)
+	
+	// bringe Leerfeld auf Position 4,4 (unten rechts)
+	verschiebeLeerfeld(4,4,{1,2,3,4,5,6,7,8,9,10,13,14})
