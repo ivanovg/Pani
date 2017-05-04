@@ -1,7 +1,7 @@
 package exersize6;
 
 /**
- * Created by pani on 28/04/2017.
+ * Created by Panteha Taherifard on 28/04/2017.
  */
 public class SelectionSort<T extends Comparable> extends Sorter {
 

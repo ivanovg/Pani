@@ -1,7 +1,7 @@
 package exersize6;
 
 /**
- * Created by georgi on 04.05.17.
+ * Created by Panteha Taherifard on 04.05.17.
  */
 public class QuickSort<T extends Comparable> extends Sorter {
 

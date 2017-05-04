@@ -1,7 +1,7 @@
 package exersize5;
 
 /**
- * Created by pani on 28/04/2017.
+ * Created by Panteha Taherifard on 28/04/2017.
  */
 public class BubbleSort<T extends Comparable> extends Sorter {
 

@@ -1,7 +1,7 @@
 package exersize5;
 
 /**
- * Created by georgi on 28/04/2017.
+ * Created by Panteha Taherifard on 28/04/2017.
  */
 public class ShellSort<T extends Comparable> extends Sorter {
 
