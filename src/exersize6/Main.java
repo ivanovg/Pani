@@ -6,12 +6,14 @@ import java.util.Random;
 
 public class Main {
 
-    public static final int SIZE = 10000;
+    public static final int[] SIZES= {10000, 100000, 1000000};
 
     public static void main(String[] args) {
 
         // Erstelle Sortieralgorithmen
         List<Sorter<Integer>> sorters = new LinkedList<Sorter<Integer>>();
+
+        // Diese Sortieralgorithmen dauern zu lange fuer 100.000 bzw. 1.000.000 Elemente
         /*sorters.add(new GnomeSorter<Integer>());
         sorters.add(new BubbleSort<Integer>());
         sorters.add(new InsertionSort<Integer>());
@@ -26,20 +28,23 @@ public class Main {
         sorters.add(new QuickSortRandomThree<Integer>());
 
         // Lasse Algorithmen gegen verschiedene Eingaben laufen
-        System.out.println("SORTIERTE EINGABE:");
-        runSortersOnInput(sorters, createSortedArray(SIZE));
+        for (int SIZE: SIZES) {
+            System.out.println("SORTIERTE EINGABE: " + SIZE + " ELEMENTE");
+            runSortersOnInput(sorters, createSortedArray(SIZE));
 
-        System.out.println("\nFAST SORTIERTE EINGABE (5% SWAPS):");
-        runSortersOnInput(sorters, createAlmostSortedArray(SIZE, SIZE / 20));
+            System.out.println("\nFAST SORTIERTE EINGABE (5% SWAPS): " + SIZE + " ELEMENTE");
+            runSortersOnInput(sorters, createAlmostSortedArray(SIZE, SIZE / 20));
 
-        System.out.println("\nTEILWEISE SORTIERTE EINGABE MIT 10% ZUFAELLIGEN WERTEN AM ENDE:");
-        runSortersOnInput(sorters, createPartiallySortedArray(SIZE, 0.10));
+            System.out.println("\nTEILWEISE SORTIERTE EINGABE MIT 10% ZUFAELLIGEN WERTEN AM ENDE: " + SIZE + " ELEMENTE");
+            runSortersOnInput(sorters, createPartiallySortedArray(SIZE, 0.10));
 
-        System.out.println("\nZUFAELLIGE EINGABE:");
-        runSortersOnInput(sorters, createRandomArray(SIZE));
+            System.out.println("\nZUFAELLIGE EINGABE: " + SIZE + " ELEMENTE");
+            runSortersOnInput(sorters, createRandomArray(SIZE));
 
-        System.out.println("\nUMGEKEHRT SORTIERTE EINGABE:");
-        runSortersOnInput(sorters, createInverseSortedArray(SIZE));
+            System.out.println("\nUMGEKEHRT SORTIERTE EINGABE: " + SIZE + " ELEMENTE");
+            runSortersOnInput(sorters, createInverseSortedArray(SIZE));
+            System.out.println("\n\n\n");
+        }
 
     }
 

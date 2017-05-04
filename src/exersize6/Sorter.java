@@ -48,8 +48,8 @@ public abstract class Sorter<T extends Comparable<T>> {
         sort();
         long end = System.currentTimeMillis();
         if (assertSorted()) {
-            String pattern = name() + " hat {0} Vergleiche und {1} Vertauschungen in {2}ms durchgefuehrt.";
-            System.out.println(MessageFormat.format(pattern, compareCount, swapCount, end - start));
+            String pattern = name() + " hat {0} Vergleiche und {1} Vertauschungen in {2}ms durchgefuehrt. c={3}";
+            System.out.println(MessageFormat.format(pattern, compareCount, swapCount, end - start, c(compareCount)));
         } else {
             System.out.println(name() + " hat die Eingabe nicht sortiert!");
         }
@@ -117,6 +117,10 @@ public abstract class Sorter<T extends Comparable<T>> {
     protected final boolean less(int firstIndex, int secondIndex) {
         compareCount++;
         return array[firstIndex].compareTo(array[secondIndex]) < 0;
+    }
+
+    private double c(int compareCount) {
+        return compareCount/(array.length * Math.log(array.length)/Math.log(2));
     }
 
 }
