@@ -3,7 +3,7 @@ package exersize5;
 /**
  * Created by Panteha Taherifard on 28/04/2017.
  */
-public class SelectionSort<T extends Comparable> extends Sorter {
+public class SelectionSort<T extends Comparable<T>> extends Sorter<T> {
 
     @Override
     protected String name() {
