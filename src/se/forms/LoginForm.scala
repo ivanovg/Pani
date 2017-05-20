@@ -1,4 +1,4 @@
-package se.forms
+package forms
 
 /**
   * Created by Panteha on 02/05/2017.
