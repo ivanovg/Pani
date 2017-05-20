@@ -1,0 +1,18 @@
+@(user: User, categories: List[Category], personalInfoForm: Form[forms.PersonalInfoForm])
+
+@import views.html.helper
+
+@personalMenu(user, categories) {
+    <h1>
+        Persönliche Information ändern
+    </h1>
+    <div class="personal-info">
+        @helper.form(action = routes.UserController.updateUser()) {
+            @helper.inputText(personalInfoForm("firstName"))
+            @helper.inputText(personalInfoForm("lastName"))
+            @helper.inputText(personalInfoForm("userName"))
+            @helper.inputText(personalInfoForm("email"))
+            <button type="submit">Ändern</button>
+        }
+    </div>
+}

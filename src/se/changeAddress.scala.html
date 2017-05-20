@@ -1,0 +1,18 @@
+@(user: User, categories: List[Category], addressForm: Form[forms.AddressForm])
+
+@import views.html.helper
+
+@personalMenu(user, categories) {
+    <h1>
+        Addresse ändern
+    </h1>
+    <div class="personal-info">
+        @helper.form(action = routes.AddressController.updateAddress()) {
+            @helper.inputText(addressForm("street"))
+            @helper.inputText(addressForm("postCode"))
+            @helper.inputText(addressForm("city"))
+            @helper.inputText(addressForm("country"))
+            <button type="submit">Addresse ändern</button>
+        }
+    </div>
+}

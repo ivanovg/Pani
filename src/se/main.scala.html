@@ -1,0 +1,16 @@
+@(title: String)(content: Html)
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>@title</title>
+        <link rel="stylesheet" href="@routes.Assets.versioned("/stylesheets/main.css")">
+    </head>
+    <body>
+        @content
+        <div class="footer">
+            Created by: Georgi Ivanov, Panteha Taherifard, Janina Seluga, Tina Kirstein
+        </div>
+    </body>
+</html>

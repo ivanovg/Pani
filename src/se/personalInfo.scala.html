@@ -1,0 +1,27 @@
+@(user: User, categories: List[Category], address: Address)
+
+@personalMenu(user, categories) {
+    <h3>
+        Persönliches:
+    </h3>
+    <p>
+        Vorname:  @user.firstName<br>
+        Nachname: @user.lastName<br>
+        Username: @user.userName<br>
+        Email:    @user.email<br>
+    </p>
+    <h3>
+        Addresse:
+    </h3>
+    @if(address.addressID == 0) {
+        <p>
+            Keine Addresse hinterlegt!
+        </p>
+    } else {
+        <p>
+            @address.street<br>
+            @address.postCode @address.city
+            @address.country
+        </p>
+    }
+}

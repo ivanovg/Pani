@@ -1,0 +1,39 @@
+@(registerForm: Form[forms.RegisterForm], loginForm: Form[forms.LoginForm])(content: Html)
+
+@import views.html.helper
+
+@main(models.Company.name) {
+    <div class="top-menu">
+        <ul class="top-menu-nav">
+            <li class="menu-button" id="register">
+                <div class="register" id="register-btn">Anmelden
+                    <div class="register-tooltip">
+                        @helper.form(action = routes.Application.register()) {
+                            @helper.inputText(registerForm("email"))
+                            @helper.inputPassword(registerForm("password"))
+                            @helper.inputPassword(registerForm("confirmPassword"))
+                            <button type="submit">Anmelden</button>
+                        }
+                    </div>
+                </div>
+            </li>
+            <li class="menu-button">
+                <div class="login" id="login-btn">Einloggen
+                    <div class="login-tooltip">
+                        @helper.form(action = routes.Application.login()) {
+                            @helper.inputText(loginForm("userName"))
+                            @helper.inputPassword(loginForm("password"))
+                            <button class="register-tooltip" type="submit">Einloggen</button>
+                        }
+                    </div>
+                </div>
+            </li>
+            <li class="menu-button" id="impressum">
+                <div id="impressum-btn"><a href="/impressum">Impressum</a></div>
+            </li>
+        </ul>
+        <div class="content">
+            @content
+        </div>
+    </div>
+}

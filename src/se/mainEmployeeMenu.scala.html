@@ -1,0 +1,27 @@
+@(user: User)(content: Html)
+
+@main(models.Company.name) {
+    <div class="top-menu">
+        <ul class="top-menu-nav">
+            <a class="top-menu-btn" href="/products">PRODUKTE</a>
+            <a class="top-menu-btn" href="/orders">BESTELLUNGEN</a>
+            <button class="top-menu-btn">NUTZER</button>
+            <div class="user-dropdown-content">
+                <a class="top-menu-btn" href="/users">KUNDEN</a>
+                <a class="top-menu-btn" href="/users">MITARBEITER</a>
+            </div>
+            <button class="tom-menu-btn">MEHR</button>
+            <div class="more-dropdown-content">
+                <a class="top-menu-btn" href="/categories">KATEGORIEN</a>
+                <a class="top-menu-btn" href="/user-status">NUTZER STATUS</a>
+                <a class="top-menu-btn" href="/order-status">BESTELLUNG STATUS</a>
+                <a class="top-menu-btn" href="/allergens">ALLERGENE</a>
+            </div>
+            <span class="welcome">Willkommen @user.userName</span>
+            <a href="/logout">Ausloggen</a>
+        </ul>
+    </div>
+    <div>
+      @content
+    </div>
+}
