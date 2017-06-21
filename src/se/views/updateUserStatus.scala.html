@@ -1,0 +1,12 @@
+@(user: User, userStatusID: Long, userStatusForm: Form[forms.UserStatusForm])
+
+@import views.html.helper
+
+@mainEmployeeMenu(user) {
+    @helper.form(action = routes.UserStatusController.updateUserStatus(userStatusID)) {
+        @helper.inputText(userStatusForm("name"), 'value -> userStatusForm.value.get.name)
+        @helper.inputText(userStatusForm("description"), 'value -> userStatusForm.value.get.description)
+        <a href="/user-status">Abbrechen</a>
+        <button type="submit">Ändern</button>
+    }
+}

@@ -1,5 +1,48 @@
-@(user: User, categoriesList: List[Category])
+@(user: User, categoriesList: List[Category], products: List[Product], productDetails: scala.collection.mutable.Map[Product, List[ProductDetail]],
+        extras: scala.collection.mutable.Map[Product, List[Product]], allergens: scala.collection.mutable.Map[Product, List[Allergen]])(content: Html)
+
+@import views.html.helper
 
 @mainCustomerMenu(user, categoriesList) {
-    Products Customer TODO
+    <div class="cart">
+        @content
+    </div>
+    <div class="data">
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+            </tr>
+            @for(product <- products) {
+                <tr>
+                    <td>@product.name</td>
+                    <td>@product.description</td>
+                </tr>
+
+                <tr class="extras">
+                    <td colspan=2>
+                        <div class="extras-content">
+                            @helper.form(action = routes.UserController.addToCart()) {
+                                Allergens:
+                                @for(allergen <- allergens.apply(product)) {
+                                    @allergen.name,
+                                }
+                                <br>
+                                @for(productDetail <- productDetails.apply(product)) {
+                                    <input type="radio" name="sizeOption" value="@productDetail.productDetailID">@productDetail.size @productDetail.unit
+                                }
+                                <br>
+                                @for(extra <- extras.apply(product)) {
+                                    <input type="checkbox" name="extras[@extra.productID]" value="@extra.productID">@extra.name
+                                }
+                                <input type="number" name="quantity" value="1">
+                                <button type="submit">Add to cart</button>
+                            }
+                        </div>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+
 }

@@ -1,5 +1,49 @@
-@(user: User)
+@(user: User, products: Map[Product, List[ProductDetail]], categories: Map[Long, String], productStatuses: Map[Long, String])(content: Html)
 
 @mainEmployeeMenu(user) {
-    Products Employee TODO
+    <div class="filter">
+        @content
+    </div>
+    <a href="/add-product-page">Add Product</a>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Category</th>
+            <th></th>
+            <th></th>
+        </tr>
+        @for(product <- products.keys) {
+            <tr>
+                <td>@product.productID</td>
+                <td>@product.name</td>
+                <td>@product.description</td>
+                <td>@categories.apply(product.categoryID)</td>
+                <td><a href="@routes.ProductController.updateProductPage(product.productID)">Update</a> </td>
+                <td><a href="@routes.ProductController.deleteProduct(product.productID)">Delete</a> </td>
+            </tr>
+
+            <tr>
+                <td colspan="6">
+                    <div>
+                        <table>
+                            <tr>
+                                <th>Size</th>
+                                <th>Price</th>
+                                <th>Status</th>
+                            </tr>
+                            @for(productDetail <- products.apply(product)) {
+                                <tr>
+                                        <td>@productDetail.size @productDetail.unit</td>
+                                        <td>@productDetail.price</td>
+                                        <td>@productStatuses.apply(productDetail.productStatusID)</td>
+                                </tr>
+                            }
+                        </table>
+                    </div>
+                </td>
+            </tr>
+        }
+    </table>
 }

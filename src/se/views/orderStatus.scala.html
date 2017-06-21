@@ -1,5 +1,23 @@
-@(user: User)
+@(user: User, statuses: List[OrderStatus])
 
 @mainEmployeeMenu(user) {
-  Order Status TODO
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Bezeichnung</th>
+      <th></th>
+      <th></th>
+    </tr>
+    @for(status <- statuses) {
+      <tr>
+        <td>@status.orderStatusID</td>
+        <td>@status.name</td>
+        <td>@status.description</td>
+        <td><a href="@routes.OrderStatusController.updateOrderStatusPage(status.orderStatusID)">Ändern</a></td>
+        <td><a href="@routes.OrderStatusController.deleteOrderStatus(status.orderStatusID)">Löschen</a></td>
+      </tr>
+    }
+  </table>
+  <a href="add-order-status-page">Hinzufügen</a>
 }

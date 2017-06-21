@@ -13,4 +13,4 @@ package forms
   * @param city Address's city.
   * @param coutry Address's country.
   */
-case class AddressForm(street: String, postCode: Int, city: String, coutry: String)
+case class AddressForm(street: String, postCode: String, city: String, coutry: String)

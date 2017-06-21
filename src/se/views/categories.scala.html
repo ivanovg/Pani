@@ -1,5 +1,23 @@
-@(user: User)
+@(user: User, categories: List[Category])
 
 @mainEmployeeMenu(user) {
-  Categories TODO
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Bezeichnung</th>
+      <th></th>
+      <th></th>
+    </tr>
+    @for(category <- categories) {
+      <tr>
+        <td>@category.categoryID</td>
+        <td>@category.name</td>
+        <td>@category.description</td>
+        <td><a href="@routes.CategoryController.updateCategoryPage(category.categoryID)">Ändern</a></td>
+        <td><a href="@routes.CategoryController.deleteCategory(category.categoryID)">Löschen</a> </td>
+      </tr>
+    }
+  </table>
+  <a href="@routes.CategoryController.addCategoryPage()">Hinzufügen</a>
 }

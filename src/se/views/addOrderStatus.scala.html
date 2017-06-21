@@ -1,0 +1,11 @@
+@(user: User, orderStatusForm: Form[forms.OrderStatusForm])
+
+@import views.html.helper
+
+@mainEmployeeMenu(user) {
+  @helper.form(action = routes.OrderStatusController.addOrderStatus()) {
+    @helper.inputText(orderStatusForm("name"))
+    @helper.inputText(orderStatusForm("description"))
+    <button type="submit">Hinzufügen</button>
+  }
+}

@@ -1,0 +1,34 @@
+@(orders: List[(String, String, String, Int, Double)], total: Double)
+
+@if(orders.isEmpty) {
+    Warenkorb ist leer
+} else {
+    <table>
+        @for(order <- orders) {
+            <tr>
+                <td>@order._2</td>
+                <td>@order._3</td>
+                <td>
+                    @if(!order._3.equals("")) {
+                        @order._4
+                    }
+                </td>
+                <td>@order._5</td>
+                <td>
+                    @if(!order._3.equals("")) {
+                        <div>
+                            <a href="@routes.UserController.removeFromCart(order._1)">-</a>
+                        </div>
+                    }
+                </td>
+            </tr>
+        }
+        <tr>
+            <td rowspan=5>
+                Total: @total
+            </td>
+        </tr>
+    </table>
+    <a href="@routes.UserController.clearCart()">Warenkorb löschen</a>
+    <a href="/checkout">Bezahlen</a>
+}

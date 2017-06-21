@@ -1,0 +1,37 @@
+@(productForm: Form[forms.AddUpdateProductForm], categories: List[Category], productStatuses: List[ProductStatus])
+
+@import views.html.helper
+
+<html>
+    <head>
+        <title>Add Product</title>
+    </head>
+    <body>
+        @helper.form(action = routes.ProductController.addProduct()) {
+            <div id="addProduct">
+                @helper.inputText(productForm("name"))
+                @helper.inputText(productForm("description"))
+                <select name="category">
+                    @for(category <- categories) {
+                        <option value="@category.categoryID">@category.name</option>
+                    }
+                </select>
+                <br>
+                @for(i <- 1 to 3) {
+                    Größe:<input type="text" name="sizes[@i]">
+                    Einheit:<input type="text" name="units[@i]">
+                    Preis:<input type="text" name="prices[@i]">
+                    Status:<select name="statuses[@i]">
+                        @for(productStatus <- productStatuses) {
+                            <option value="@productStatus.productStatusID">@productStatus.name</option>
+                        }
+                    </select>
+
+                    <br>
+                }
+            </div>
+            <a href="/all-products">Abbrechen</a>
+            <button type="submit">Hinzufügen</button>
+        }
+    </body>
+</html>

@@ -1,0 +1,11 @@
+@(user: User, allergenID: Long, allergenForm: Form[forms.AllergenForm])
+
+@import views.html.helper
+
+@mainEmployeeMenu(user) {
+    @helper.form(action = routes.AllergenController.updateAllergen(allergenID)) {
+        @helper.inputText(allergenForm("name"), 'value -> allergenForm.value.get.name)
+        <a href="/allegens">Abbrechen</a>
+        <button type="submit">Ändern</button>
+    }
+}

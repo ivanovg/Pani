@@ -4,18 +4,22 @@
     <div class="top-menu">
         <ul class="top-menu-nav">
             @for(i <- 0 to 3) {
-            <a class="top-menu-btn" href="/products">@categories.apply(i).name.toUpperCase</a>
-        }
+                @if(!categories.apply(i).name.equals("Extra")) {
+                    <a class="top-menu-btn" href="@routes.UserController.products(categories.apply(i).categoryID)">@categories.apply(i).name.toUpperCase</a>
+                }
+            }
             <button class="top-menu-btn">MEHR</button>
             <div class="user-dropdown-content">
                 @for(category <- categories.drop(4)) {
-                <a class="top-menu-btn" href="/products">@category.name</a>
-            }
+                    @if(!category.name.equals("Extra")) {
+                        <a class="top-menu-btn" href="@routes.UserController.products(category.categoryID)">@category.name.toUpperCase</a>
+                    }
+                }
             </div>
             <button class="top-menu-btn">EINSTELLUNGEN</button>
             <div class="more-dropdown-content">
                 <a class="top-menu-btn" href="/personal-info">Persönliche Information</a>
-                <a class="top-menu-btn" href="/orders">Eigene Bestellungen</a>
+                <a class="top-menu-btn" href="/personal-orders">Eigene Bestellungen</a>
             </div>
             <span class="welcome">Willkommen @user.userName</span>
             <a href="/logout">Ausloggen</a>

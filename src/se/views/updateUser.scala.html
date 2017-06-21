@@ -1,0 +1,33 @@
+@(userID: Long, userForm: Form[forms.AddUpdateUserForm], accessLevels: List[AccessLevel])
+
+@import views.html.helper
+
+<html>
+    <head>
+        <title>Update User</title>
+    </head>
+    <body>
+    @helper.form(action = routes.UserController.updateUser(userID)) {
+        @helper.inputText(userForm("userName"), 'value -> userForm.value.get.userName)
+        @helper.inputText(userForm("firstName"), 'value -> userForm.value.get.firstName)
+        @helper.inputText(userForm("lastName"), 'value -> userForm.value.get.lastName)
+        @helper.inputText(userForm("email"), 'value -> userForm.value.get.email)
+        @helper.inputText(userForm("password"), 'value -> userForm.value.get.password)
+        <select name="accessLevel">
+        @for(accessLevel <- accessLevels) {
+            @if(accessLevel.accessLevelID == userForm.value.get.accessLevel) {
+                <option value="@accessLevel.accessLevelID" selected>@accessLevel.name</option>
+            } else {
+                <option value="@accessLevel.accessLevelID">@accessLevel.name</option>
+            }
+        }
+        </select>
+        @helper.inputText(userForm("street"), 'value -> userForm.value.get.street)
+        @helper.inputText(userForm("postCode"), 'value -> userForm.value.get.postCode)
+        @helper.inputText(userForm("city"), 'value -> userForm.value.get.city)
+        @helper.inputText(userForm("country"), 'value -> userForm.value.get.country)
+        <a href="/users">Abbrechen</a>
+        <button type="submit">Ändern</button>
+    }
+    </body>
+</html>

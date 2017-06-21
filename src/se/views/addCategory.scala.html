@@ -1,0 +1,16 @@
+@(categoryForm: Form[forms.CategoryForm])
+
+@import views.html.helper
+
+<html>
+    <head>
+        <title>Add Category</title>
+    </head>
+    <body>
+        @helper.form(action = routes.CategoryController.addCategory()) {
+            @helper.inputText(categoryForm("name"))
+            @helper.inputText(categoryForm("description"))
+            <button type="submit">Hinzufügen</button>
+        }
+    </body>
+</html>

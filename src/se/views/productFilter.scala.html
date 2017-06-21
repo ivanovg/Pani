@@ -1,0 +1,19 @@
+@(form: Form[forms.ProductFilterForm], categories: List[Category], productStatuses: List[ProductStatus])
+
+@import views.html.helper
+
+<div>
+    @helper.form(action = routes.ProductController.selectProducts()) {
+        @helper.inputText(form("name"))
+        @for(category <- categories) {
+            <input type="checkbox" name="categories[@category.categoryID]" value="@category.categoryID">@category.name
+        }
+        @helper.inputText(form("priceStart"))
+        @helper.inputText(form("priceEnd"))
+        @for(productStatus <- productStatuses) {
+            <input type="checkbox" name="statuses[@productStatus.productStatusID]" value="@productStatus.productStatusID">@productStatus.name
+        }
+        <br>
+        <button type="submit">Suche</button>
+    }
+</div>

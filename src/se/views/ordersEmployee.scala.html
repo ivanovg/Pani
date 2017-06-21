@@ -1,5 +1,59 @@
-@(user: User)
+@(user: User, orders: Map[OrderDetail, List[Order]], users: Map[Long, User], addresses: Map[Long, Address], products: Map[Long, List[(String, ProductDetail)]],
+        extras: Map[Long, List[(String, Double)]], orderStatuses: Map[Long, OrderStatus])(content: Html)
 
 @mainEmployeeMenu(user) {
-  Orders Employee TODO
+    <div class="filter">
+        @content
+    </div>
+    <div class="content">
+        <table>
+            <tr>
+                <th>Bestellzeit</th>
+                <th>Kunde</th>
+                <th>Addresse</th>
+                <th>Preis</th>
+                <th>Status</th>
+            </tr>
+            @for(orderDetail <- orders) {
+                <tr>
+                    <td>@orderDetail._1.time</td>
+                    @if(users.apply(orderDetail._2.head.userID).firstName.equals("") && users.apply(orderDetail._2.head.userID).lastName.equals("")) {
+                        <td>@users.apply(orderDetail._2.head.userID).userName</td>
+                    } else {
+                        <td>@users.apply(orderDetail._2.head.userID).firstName @users.apply(orderDetail._2.head.userID).lastName</td>
+                    }
+                    <td>@addresses.apply(users.apply(orderDetail._2.head.userID).addressID).street, @addresses.apply(users.apply(orderDetail._2.head.userID).addressID).postCode
+                        @addresses.apply(users.apply(orderDetail._2.head.userID).addressID).city, @addresses.apply(users.apply(orderDetail._2.head.userID).addressID).country</td>
+                    <td>@orderDetail._1.price</td>
+                    <td>@orderStatuses.apply(orderDetail._1.orderStatusID).name</td>
+                </tr>
+                @for(order <- orders.apply(orderDetail._1)) {
+                    @for(product <- products.apply(order.orderID)) {
+                        <tr>
+                            <td colspan="5">
+                                <div>
+                                    <table>
+                                        <tr>
+                                            <td>@product._1</td>
+                                            <td>@product._2.size @product._2.unit</td>
+                                            <td>@order.quantity</td>
+                                            <td>@order.price</td>
+                                        </tr>
+                                        @for(extra <- extras.apply(order.orderNumber)) {
+                                            <tr>
+                                                <td> + @extra._1</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>@extra._2</td>
+                                            </tr>
+                                        }
+                                    </table>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+            }
+        </table>
+    </div>
 }

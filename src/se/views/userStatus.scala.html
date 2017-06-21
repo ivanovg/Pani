@@ -1,5 +1,23 @@
-@(user: User)
+@(user: User, statuses: List[UserStatus])
 
 @mainEmployeeMenu(user) {
-  User Status TODO
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Bezeichnung</th>
+      <th></th>
+      <th></th>
+    </tr>
+    @for(status <- statuses) {
+      <tr>
+        <td>@status.id</td>
+        <td>@status.name</td>
+        <td>@status.description</td>
+        <td><a href="@routes.UserStatusController.updateUserStatusPage(status.id)">Ändern</a></td>
+        <td><a href="@routes.UserStatusController.deleteUserStatus(status.id)">Löschen</a></td>
+      </tr>
+    }
+  </table>
+  <a href="add-user-status-page">Hinzufügen</a>
 }

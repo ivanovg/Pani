@@ -1,0 +1,27 @@
+@(form: Form[forms.UserFilterForm], accessLevels: List[AccessLevel], statuses: List[UserStatus])
+
+@import views.html.helper
+
+<div class="filter">
+    @helper.form(action = routes.UserController.selectUsers()) {
+        @helper.inputText(form("userName"))
+        @helper.inputText(form("firstName"))
+        @helper.inputText(form("lastName"))
+        @helper.inputText(form("street"))
+        @helper.inputText(form("postCode"))
+        @helper.inputText(form("city"))
+        @helper.inputText(form("country"))
+        @helper.inputText(form("email"))
+        Zugriff:
+        @for(accessLevel <- accessLevels) {
+            <input type="checkbox" name="access[@accessLevel.accessLevelID]" value="@accessLevel.accessLevelID">@accessLevel.name
+        }
+        <br>
+        Status:
+        @for(status <- statuses) {
+            <input  type="checkbox" name="status[@status.id]" value="@status.id">@status.name
+        }
+        <br>
+        <button type="submit">Suchen</button>
+    }
+</div>

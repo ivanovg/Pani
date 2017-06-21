@@ -1,13 +1,11 @@
 @(user: User, categoriesList: List[Category])(content: Html)
 
-@import views.html.helper
-
 @mainCustomerMenu(user, categoriesList) {
     <h1>
         Personal Info:
     </h1>
     <div class="left-menu">
-        <a href="/update-user-page">Persönliche Information ändern</a>
+        <a href="/update-personal-info-page">Persönliche Information ändern</a>
         <a href="/update-address-page">Addresse ändern</a>
         <a href="/change-password-page">Passwort wechseln</a>
     </div>

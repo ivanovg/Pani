@@ -1,5 +1,34 @@
-@(user: User, categoriesList: List[Category])
+@(user: User, categoriesList: List[Category], orders: Map[OrderDetail, List[(String, String, Int, Double)]], total: Double = 0)
 
 @mainCustomerMenu(user, categoriesList) {
-  Orders Customer TODO
+    <div class="ordersDetails">
+        <table>
+            @for(order <- orders) {
+                <tr>
+                    <td rowspan="@orders.size"></td>
+                    <td>@order._2.head._1</td>
+                    <td>@order._2.head._2</td>
+                    <td>@order._2.head._3</td>
+                    <td>@order._2.head._4</td>
+                </tr>
+                @for(item <- order._2.drop(1)) {
+                    <tr>
+                        <td>@item._1</td>
+                        <td>@item._2</td>
+                        <td>@item._3</td>
+                        <td>@item._4</td>
+                    </tr>
+                }
+                <tr>
+                    <td colspan="4">Total:</td>
+                    <td>@order._1.price</td>
+                </tr>
+                @total += order._1.price
+            }
+            <tr>
+                <td colspan="4">Grand Total:</td>
+                <td>@total</td>
+            </tr>
+        </table>
+    </div>
 }

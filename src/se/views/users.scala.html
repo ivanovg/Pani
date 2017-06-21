@@ -1,5 +1,40 @@
-@(user: User)
+@(user: User, users: Map[User, Address], accessLevels: Map[Long, String], statuses: Map[Long, String])(content: Html)
 
 @mainEmployeeMenu(user) {
-  Users TODO
+  <div class="filter">
+    @content
+  </div>
+  <a href="/add-user-page">Add User</a>
+  <div class="content">
+    <table>
+      <tr>
+        <th>Benutzername</th>
+        <th>Vorname</th>
+        <th>Nachname</th>
+        <th>Addresse</th>
+        <th>Email</th>
+        <th>Zugriff</th>
+        <th>Status</th>
+        <th></th>
+        <th></th>
+      </tr>
+      @for(person <- users) {
+        <tr>
+          <td>@person._1.userName</td>
+          <td>@person._1.firstName</td>
+          <td>@person._1.lastName</td>
+          @if(person._2.addressID == 0) {
+            <td></td>
+          } else {
+            <td>@person._2.street, @person._2.postCode @person._2.city, @person._2.country</td>
+          }
+          <td>@person._1.email</td>
+          <td>@accessLevels.apply(person._1.accessLevel)</td>
+          <td>@statuses.apply(person._1.userStatusID)</td>
+          <td><a href="@routes.UserController.updateUserPage(person._1.id)">Update</a> </td>
+          <td><a href="@routes.UserController.deleteUser(person._1.id)">Delete</a> </td>
+        </tr>
+      }
+    </table>
+  </div>
 }

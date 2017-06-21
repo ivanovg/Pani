@@ -7,7 +7,7 @@
         Persönliche Information ändern
     </h1>
     <div class="personal-info">
-        @helper.form(action = routes.UserController.updateUser()) {
+        @helper.form(action = routes.UserController.updatePersonalInfo()) {
             @helper.inputText(personalInfoForm("firstName"))
             @helper.inputText(personalInfoForm("lastName"))
             @helper.inputText(personalInfoForm("userName"))

@@ -1,0 +1,29 @@
+@(form: Form[forms.AddUpdateUserForm], accessLevels: List[AccessLevel])
+
+@import views.html.helper
+
+<html>
+    <head>
+        <title>Add User</title>
+    </head>
+    <body>
+        @helper.form(action = routes.UserController.addUser()) {
+            @helper.inputText(form("userName"))
+            @helper.inputText(form("firstName"))
+            @helper.inputText(form("lastName"))
+            @helper.inputText(form("email"))
+            @helper.inputText(form("password"))
+            <select name="accessLevel">
+                @for(accessLevel <- accessLevels) {
+                    <option value="@accessLevel.accessLevelID">@accessLevel.name</option>
+                }
+            </select>
+            @helper.inputText(form("street"))
+            @helper.inputText(form("postCode"))
+            @helper.inputText(form("city"))
+            @helper.inputText(form("country"))
+            <a href="/users">Abbrechen</a>
+            <button type="submit">Hinzufügen</button>
+        }
+    </body>
+</html>

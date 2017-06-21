@@ -1,0 +1,45 @@
+@(productID: Long, productForm: Form[forms.AddUpdateProductForm], categories: List[Category], productStatuses: List[ProductStatus])
+
+@import views.html.helper
+
+<html>
+    <head>
+        <title>Update Product</title>
+    </head>
+    <body>
+        @helper.form(action = routes.ProductController.updateProduct(productID)) {
+            <div id="addProduct">
+                @helper.inputText(productForm("name"), 'value -> productForm.value.get.name)
+                @helper.inputText(productForm("description"), 'value -> productForm.value.get.description)
+                <select name="category">
+                @for(category <- categories) {
+                    @if(category.categoryID == productForm.value.get.category) {
+                        <option value="@category.categoryID" selected>@category.name</option>
+                    } else {
+                        <option value="@category.categoryID">@category.name</option>
+                    }
+                }
+                </select>
+                <br>
+                @for(i <- 0 to productForm.value.get.sizes.length - 1) {
+                    Größe:<input type="text" name="sizes[@i]" value="@productForm.value.get.sizes.apply(i)">
+                    Einheit:<input type="text" name="units[@i]" value="@productForm.value.get.units.apply(i)">
+                    Preis:<input type="text" name="prices[@i]" value="@productForm.value.get.prices.apply(i)">
+                    Status:<select name="statuses[@i]">
+                    @for(productStatus <- productStatuses) {
+                        @if(productStatus.productStatusID == productForm.value.get.statuses.apply(i)) {
+                            <option value="@productStatus.productStatusID" selected>@productStatus.name</option>
+                        } else {
+                            <option value="@productStatus.productStatusID">@productStatus.name</option>
+                        }
+                    }
+                    </select>
+
+                    <br>
+                    }
+            </div>
+            <a href="/all-products">Abbrechen</a>
+            <button type="submit">Aktualisieren</button>
+        }
+    </body>
+</html>

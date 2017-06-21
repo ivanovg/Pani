@@ -1,5 +1,21 @@
-@(user: User)
+@(user: User, allergens: List[Allergen])
 
 @mainEmployeeMenu(user) {
-  Allergens TODO
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th></th>
+      <th></th>
+    </tr>
+    @for(allergen <- allergens) {
+      <tr>
+        <td>@allergen.allergenID</td>
+        <td>@allergen.name</td>
+        <td><a href="@routes.AllergenController.updateAllergenPage(allergen.allergenID)">Ändern</a></td>
+        <td><a href="@routes.AllergenController.deleteAllergen(allergen.allergenID)">Löschen</a></td>
+      </tr>
+    }
+  </table>
+  <a href="/add-allergen-page">Hinzufügen</a>
 }

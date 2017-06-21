@@ -1,0 +1,10 @@
+@(user: User, allergenForm: Form[forms.AllergenForm])
+
+@import views.html.helper
+
+@mainEmployeeMenu(user) {
+    @helper.form(action = routes.AllergenController.addAllergen()) {
+        @helper.inputText(allergenForm("name"))
+        <button type="submit">Hinzufügen</button>
+    }
+}

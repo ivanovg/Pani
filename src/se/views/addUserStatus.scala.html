@@ -1,0 +1,11 @@
+@(user: User, userStatusForm: Form[forms.UserStatusForm])
+
+@import views.html.helper
+
+@mainEmployeeMenu(user) {
+    @helper.form(action = routes.UserStatusController.addUserStatus()) {
+        @helper.inputText(userStatusForm("name"))
+        @helper.inputText(userStatusForm("description"))
+        <button type="submit">Hinzufügen</button>
+    }
+}
